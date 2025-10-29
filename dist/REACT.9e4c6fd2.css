@@ -63,4 +63,13 @@
   height: 400px;
   margin: 20px;
 }
+
+.login {
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+.filter {
+  display: flex;
+}
 /*# sourceMappingURL=REACT.9e4c6fd2.css.map */

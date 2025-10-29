@@ -12,6 +12,13 @@ const Body=()=>{
     //LOCAL STATE VARIABLE - SUPER POWERFUL REACT VARIABLE
      const[listOfRestaurants,setListOfRestaurant]=useState([]);
 
+     const [filteredRestaurants,setFilteredRestaurant]=useState([]);
+
+
+     const [searchText,setSearchText]=useState("");
+
+     console.log("Body Rendered");
+
 
 
      useEffect(()=>{
@@ -28,16 +35,40 @@ const Body=()=>{
         console.log(json);
 
 
+
+
+//         const restaurants =
+//     json?.data?.cards
+//       ?.find(
+//         (card) =>
+//           card?.card?.card?.gridElements?.infoWithStyle?.restaurants
+//       )?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+
+//   setFilteredRestaurants(restaurants);
+// };
+
+
+
+
    
 setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+
+setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+
 
 
 
      };
 
-     if(listOfRestaurants.length===0){
-        return <Shimmer />;
-     }
+
+
+
+
+
+
+     //CONDITIONAL RENDERING
+
+   
 
 
 
@@ -59,13 +90,26 @@ setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyl
 
 
      
-    return(
+    return listOfRestaurants.length===0 ? <Shimmer /> :(
         <div className="body">
             <div className="filter">
+                <div className="search">
+                    <input type="text" className="search-box" value={searchText} onChange={(e)=>{
+                        setSearchText(e.target.value);
+                    }} />
+
+
+                    <button onClick={()=>{
+                        console.log(searchText);
+
+                        const filteredRestaurants=listOfRestaurants.filter((res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));
+                        setFilteredRestaurant(filteredRestaurants);
+                    }}>Search</button>
+                </div>
                 <button className="filter-btn" onClick={()=>{
 
                    const filteredList= listOfRestaurants.filter((res)=>res.info.avgRating>4.2);
-                    setListOfRestaurant(filteredList);
+                    setFilteredRestaurant(filteredList);
                 }}
                 >
                     Top Rated Restaurant</button>
@@ -75,7 +119,7 @@ setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyl
 
 
             {
-  listOfRestaurants.map((restaurant) => (
+  filteredRestaurants.map((restaurant) => (
     <RestaurantCard key={restaurant.info.id} resData={restaurant.info} />
   ))
 }
