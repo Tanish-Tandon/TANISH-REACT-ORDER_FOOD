@@ -2,7 +2,7 @@
 import RestaurantCard from "./RestaurantCard";
 
 import { useState,useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
 
@@ -120,14 +120,20 @@ setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithSt
 
             {
   filteredRestaurants.map((restaurant) => (
-    <RestaurantCard key={restaurant.info.id} resData={restaurant.info} />
-  ))
-}
+                    <Link 
+                        key={restaurant.info.id} 
+                        to={"/restaurants/" + restaurant.info.id}
+                    >
+                        <RestaurantCard resData={restaurant} />
+                    </Link>
+                  
+                ))
+            } 
+          
 
                 {/* <Restaurant. Card 
                 resData={resObj} /> */}
                 
-
             </div>
         </div>
     ) 
