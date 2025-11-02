@@ -22,16 +22,23 @@
         "newg",
         "northindian",
         "ntjshqsv",
+        "popcountll",
         "Raiting",
         "Rasmalai",
         "Ratnesh",
         "Rxawards",
+        "seperate",
         "southindian",
+        "Suraj",
         "swiggy",
         "TANDON",
         "TANISH",
+        "Vaishnavi",
         "vmib",
         "vxtv",
         "WEBLINK"
-    ]
+    ],
+    "files.associations": {
+        "regex": "cpp"
+    }
 }

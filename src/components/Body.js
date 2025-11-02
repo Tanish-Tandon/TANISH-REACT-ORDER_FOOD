@@ -5,6 +5,8 @@ import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
+import useOnlineStatus  from "../utils/useOnlineStatus";
+
 
 
 
@@ -61,7 +63,13 @@ setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithSt
      };
 
 
-
+const onlineStatus=useOnlineStatus();
+if(onlineStatus===false)
+    return(
+<h1>
+    LOOK LIKE YOU'RE ABSENT!! PLEASE CHECK YOUR MINDSEND
+</h1>
+);
 
 
 

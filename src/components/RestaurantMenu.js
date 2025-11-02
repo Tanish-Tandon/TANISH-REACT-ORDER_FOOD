@@ -63,30 +63,33 @@
 
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
-import mockData from "./mockRestaurantMenu";
+// import mockData from "./mockRestaurantMenu";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
+// import { MENU_API } from "../utils/constants";
+import useRestaurantMenu  from "../utils/useRestaurantsMenu";
 import { Link } from "react-router-dom";
 
 const RestaurantMenu = () => {
-    const [resInfo, setResInfo] = useState(null);
+   // const [resInfo, setResInfo] = useState(null);
 
     const {resId}=useParams();
 
+    const resInfo=useRestaurantMenu(resId);
 
 
-    useEffect(() => {
+
+    // useEffect(() => {
       
-        const timer = setTimeout(() => {
+    //     const timer = setTimeout(() => {
            
-            setResInfo(mockData.data);
-        }, 500); 
+    //         setResInfo(mockData.data);
+    //     }, 500); 
 
     
-        return () => {
-            clearTimeout(timer);
-        };
-    }, []); 
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // }, []); 
 
     
    
@@ -115,3 +118,7 @@ return (
 };
 
 export default RestaurantMenu;
+
+
+
+//display the data
