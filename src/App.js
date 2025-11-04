@@ -264,9 +264,10 @@
 
 // );
 
+import "./index.css";
 
 import React,{lazy,Suspense} from "react";
-import React from "react";
+// import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -344,3 +345,5 @@ root.render(<MainApp />);
 
 
 <Route path="/restaurants/:resId" element={<RestaurantMenu />} />;
+
+

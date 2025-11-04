@@ -67,7 +67,7 @@ const onlineStatus=useOnlineStatus();
 if(onlineStatus===false)
     return(
 <h1>
-    LOOK LIKE YOU'RE ABSENT!! PLEASE CHECK YOUR MINDSEND
+    LOOK LIKE YOU'RE ABSENT!! PLEASE CHECK YOUR MINDSET
 </h1>
 );
 
@@ -100,29 +100,31 @@ if(onlineStatus===false)
      
     return listOfRestaurants.length===0 ? <Shimmer /> :(
         <div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-box" value={searchText} onChange={(e)=>{
+            <div className="filter flex">
+                <div className="search m-4 p-4">
+                    <input type="text" className="border border-solid border-black" value={searchText} onChange={(e)=>{
                         setSearchText(e.target.value);
                     }} />
 
-
-                    <button onClick={()=>{
+                 
+                    <button className="px-4 py-2 bg-green-100 m-4 rounded-3xl" onClick={()=>{
                         console.log(searchText);
 
                         const filteredRestaurants=listOfRestaurants.filter((res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                         setFilteredRestaurant(filteredRestaurants);
                     }}>Search</button>
                 </div>
-                <button className="filter-btn" onClick={()=>{
+                <div className="search m-4 p-4">
+                <button className="px-4 py-2 bg-gray-100 m-4 rounded-xl" onClick={()=>{
 
                    const filteredList= listOfRestaurants.filter((res)=>res.info.avgRating>4.2);
                     setFilteredRestaurant(filteredList);
                 }}
                 >
                     Top Rated Restaurant</button>
+                    </div>
                 </div>
-            <div className="res-container">
+            <div className="flex flex-wrap">
 
 
 
