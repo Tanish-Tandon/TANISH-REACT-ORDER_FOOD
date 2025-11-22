@@ -14,6 +14,8 @@ const User=({name})=>{
             <h2>Name:{name}</h2>
             <h3>Location:AGRA</h3>
             <h4>Contact:7983462</h4>
+            
+
 
         </div>
     );

@@ -264,30 +264,69 @@
 
 // );
 
-import "./index.css";
+import "./src/index.css";
 
-import React,{lazy,Suspense} from "react";
+import React,{lazy,Suspense, useEffect, useState} from "react";
 // import React from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
-import Body from "./components/Body";
+import Header from "./src/components/Header.js";
+import Body from "./src/components/Body.js";
 // import About from "./components/About";
-import Contact from "./components/Contact";
-import Error from "./Error";
-import RestaurantMenu from "./components/RestaurantMenu";
+import Contact from "./src/components/Contact.js";
+import Error from "./src/Error.js";
+import RestaurantMenu from "./src/components/RestaurantMenu.js";
 import { createBrowserRouter, RouterProvider, Outlet, Route } from "react-router-dom";
-import useOnlineStatus from "./utils/useOnlineStatus";
-import OfflineGame from "./components/OfflineGame";
+import useOnlineStatus from "./src/utils/useOnlineStatus.js";
+import OfflineGame from "./src/components/OfflineGame.jsx";
+import { ChakraProvider } from "@chakra-ui/react";
 // import Grocery from "./components/Grocery";
+import UserContext from "./src/utils/UserContext.js";
+import { Provider } from "react-redux";
+import appStore from "./src/utils/appStore.js";
+import Cart from "./src/components/Cart";
 
-const Grocery=lazy(()=>import("./components/Grocery"));
-const About=lazy(()=>import("./components/About"));
+const Grocery=lazy(()=>import("./src/components/Grocery.js"));
+const About=lazy(()=>import("./src/components/About.js"));
+
+
 const AppLayout = () => {
+
+
+
+
+  const [userName,setUserName]=useState();
+
+//authentication
+  useEffect(()=>{
+
+    //make an api call and send username and password
+
+    const data={
+      name:"TANISH TANDON",
+    }
+
+    setUserName(data.name);
+
+  },[]);
+
+
+
+
+
+
   return (
+    //provider is from redux tool kit
+    
+    <Provider store={appStore}>
+    <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
     <div className="app">
       <Header />
       <Outlet />
     </div>
+
+    </UserContext.Provider>
+
+    </Provider>
   );
 }; 
 
@@ -321,7 +360,17 @@ const appRouter = createBrowserRouter([
         path: "/restaurants/:resId",
         element: <RestaurantMenu />,
       },
+      {
+        path:"/offlinegame",
+        element:<OfflineGame />
+      },
+
+      {
+        path:"/cart",
+        element:<Cart />
+      }
     ],
+    errorElement : <Error />
   },
 ]);
 
@@ -330,6 +379,8 @@ const appRouter = createBrowserRouter([
 // root.render(<RouterProvider router={appRouter} />);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+
 
 const MainApp = () => {
   const onlineStatus = useOnlineStatus();

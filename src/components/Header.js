@@ -102,14 +102,41 @@
 
 
 import { LOGO_URL } from "../utils/constants";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
+
+
+
+
+
+
+
+
 
 const Header = () => {
   const [btnNamereact, setBtnNameReact] = useState("Login");
   const [darkMode, setDarkMode] = useState(false);
   const onlineStatus = useOnlineStatus();
+
+  const {loggedInUser}=useContext(UserContext);
+
+  console.log(loggedInUser)
+
+
+
+
+
+
+
+
+  const cartItems=useSelector((store)=>store.cart.items);
+
+
+
+
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -150,7 +177,7 @@ const Header = () => {
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/grocery">Grocery</Link></li>
-        <li>Cart</li>
+        <li className="px-4 font-bold text-xl"><Link to="/cart">Cart- ({cartItems.length}items)</Link></li>
 
         <button
           className="px-3 py-1 rounded border dark:border-white hover:bg-gray-200 dark:hover:bg-gray-700"
@@ -167,6 +194,8 @@ const Header = () => {
         >
           {darkMode ? "🌞 Light" : "🌙 Dark"}
         </button>
+
+        <li className="px-4 font-bold">{loggedInUser}</li>
       </ul>
     </div>
   );
